@@ -5,6 +5,7 @@ import {
   getDoc,       // Used to get a single document
   getDocs,      // Used to get multiple documents
   addDoc,       // Used to add a new document
+  serverTimestamp, // Used to add timestamps to the document
   updateDoc,    // Used to update an existing document
   deleteDoc     // Used to delete a document
 } from 'firebase/firestore';
@@ -50,6 +51,26 @@ export const getCafeById = async (id: string): Promise<Cafe | null> => {
 };
 
 // Add a new cafe
+export const addNewCafe = async (cafeData: Omit<Cafe, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> => {
+  // Prepare the data by adding timestamps
+  try {
+    const cafeWithTimestamps = {
+      ...cafeData,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp()
+    };
+
+    // Add the new cafe to the 'cafes' collection
+    const newCafeRef = await addDoc(cafesCollection, cafeWithTimestamps);
+
+    // Return the new cafe's ID
+    return newCafeRef.id;
+    
+  } catch (error) {
+    console.error('Error adding new cafe:', error);
+    throw error; // Re-throw the error so it can be handled by the caller
+  }
+};
 
 // Update Cafe ((id: string, updatedFields: Partial<Cafe>))
 
