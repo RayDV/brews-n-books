@@ -16,17 +16,41 @@ const cafesCollection = collection(db, 'cafes'); // Referencing the 'cafes' coll
 
 // Get all cafes
 export const getAllCafes = async (): Promise<Cafe[]> => {
+  // Fetch all documents from the 'cafes' collection (QuerySnapshot)
   const snapshot = await getDocs(cafesCollection);
+
+  // Transform the snapshot into an array of Cafe objects
   const cafes = snapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
+    id: doc.id,            // Get the document ID
+    ...doc.data()          // Get the rest of the cafe data
   })) as Cafe[];
+
+  // Return the array of cafes
   return cafes;
 };
 
+// Getting a single cafe (by ID)
+export const getCafeById = async (id: string): Promise<Cafe | null> => {
+  // Create a reference to the specific cafe using its ID
+  const cafeRef = doc(db, 'cafes', id);
 
-// Getting a single cafe
+  // Use getDoc to fetch the document from Firestore
+  const snapshot = await getDoc(cafeRef);
 
-// Get a cafe by ID
+  // If it exists return the cafe with its ID
+  if (snapshot.exists()) {
+    return {
+      id: snapshot.id,
+      ...snapshot.data()
+    } as Cafe;
+  }
+
+  // Return null if the document doesn't exist
+  return null;
+};
+
+// Add a new cafe
 
 // Update Cafe ((id: string, updatedFields: Partial<Cafe>))
+
+// Delete Cafe (id: string)
