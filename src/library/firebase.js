@@ -1,12 +1,19 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// Import getAnalytics conditionally if needed, or check for support
+import { getAnalytics, isSupported } from "firebase/analytics";
 import { getAuth } from "firebase/auth";                   // User Authentication
 import { getFirestore } from "firebase/firestore";         // Database
 import { getStorage } from "firebase/storage";             // Optional: file uploads
 import { getFunctions } from "firebase/functions";         // Backend logic
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
+
+// ---- Add dotenv configuration here ----
+import dotenv from 'dotenv';
+import path from 'path';
+dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
+// ---------------------------------------
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -24,7 +31,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Initialize individual services
-const analytics = getAnalytics(app);
+// Conditionally initialize Analytics
+let analytics;
+isSupported().then((supported) => {
+  if (supported) {
+    analytics = getAnalytics(app);
+    console.log("Firebase Analytics initialized.");
+  } else {
+    console.log("Firebase Analytics is not supported in this environment.");
+  }
+});
+
+// Initialize individual services
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);

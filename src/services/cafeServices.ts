@@ -10,7 +10,7 @@ import {
   deleteDoc     // Used to delete a document
 } from 'firebase/firestore';
 
-import { db } from '../library/firebase'; // Importing an isntance of our database so that the service can knows which database to talk to
+import { db } from '../library/firebase.js'; // Importing an isntance of our database so that the service can knows which database to talk to
 import { Cafe } from '../types/cafe'; // Tells TypeScript about what a Cafe should look like
 
 const cafesCollection = collection(db, 'cafes'); // Referencing the 'cafes' collection in our database
