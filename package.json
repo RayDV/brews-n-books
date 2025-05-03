@@ -8,10 +8,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test-service": "tsx src/scripts/testCafeService.ts" 
+    "test-service": "tsx src/scripts/testCafeService.ts"
   },
   "dependencies": {
     "firebase": "^11.6.1",
+    "lucide-react": "^0.507.0",
     "next": "15.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

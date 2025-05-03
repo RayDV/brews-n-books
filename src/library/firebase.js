@@ -31,7 +31,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Initialize individual services
-// Conditionally initialize Analytics
+// Conditionally initialize Analytics (I think I could delete this later. I don't think this is apart of the test script problem)
 let analytics;
 isSupported().then((supported) => {
   if (supported) {
