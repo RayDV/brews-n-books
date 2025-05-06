@@ -11,7 +11,7 @@ import {
 } from 'firebase/firestore';
 
 import { db } from '../library/firebase.js'; // Importing an isntance of our database so that the service can knows which database to talk to
-import { Cafe } from '../types/cafe'; // Tells TypeScript about what a Cafe should look like
+import { Cafe } from '../types/cafe.js'; // Tells TypeScript about what a Cafe should look like
 
 const cafesCollection = collection(db, 'cafes'); // Referencing the 'cafes' collection in our database
 
@@ -116,4 +116,3 @@ export const deleteCafe = async (id: string): Promise<void> => {
     throw error; // Re-throw the error so it can be handled by the caller
   }
 };
-

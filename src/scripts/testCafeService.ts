@@ -5,7 +5,7 @@ import {
   getAllCafes,
   updateCafe,
   deleteCafe,
-} from '../services/cafeServices.js';
+} from '../services/cafeDataBaseService.js';
 
 import { GeoPoint } from 'firebase/firestore';
 

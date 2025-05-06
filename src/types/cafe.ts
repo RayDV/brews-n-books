@@ -30,8 +30,8 @@ export interface Cafe {
 
   // Amenities for MVP
   hasWifi?: boolean;
-  powerOutlets: 'plenty' | 'some' | 'low' | 'unknown' | 'none';
-  crowdLevel: 'full' | 'medium' | 'low' | 'unknown'| 'none';
+  powerOutlets: 'Plenty' | 'Some' | 'Medium' | 'Low' | 'None' | 'Unknown';
+  crowdLevel: 'High' | 'Medium' | 'Low' | 'Unknown';
 
   createdAt?: Timestamp;
   updatedAt?: Timestamp;

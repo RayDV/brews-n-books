@@ -6,14 +6,14 @@ export interface CafeCardProps {
   name: string;
   imageUrl?: string;
   hasWifi?: boolean; // Whether WiFi is available
-  crowdLevel: 'High' | 'Medium' | 'Low' | 'Unknown'; // How crowded it is (for seating)
-  powerLevel: 'Plenty' | 'Some' | 'Medium' | 'Low' | 'None' | 'Unknown'; // Availability of power outlets
+  powerOutlets?: 'Plenty' | 'Some' | 'Medium' | 'Low' | 'None' | 'Unknown'; // Availability of power outlets
+  crowdLevel?: 'High' | 'Medium' | 'Low' | 'Unknown'; // How crowded it is (for seating)
   rating?: number; // Star rating (e.g., 4.5)
   distance?: string; // Pre-formatted distance string (e.g., "0.3 miles")
 }
 
 // Helper function to determine the Tailwind CSS background color class for indicators
-const getIndicatorColor = (level: CafeCardProps['crowdLevel'] | CafeCardProps['powerLevel']): string => {
+const getIndicatorColor = (level: CafeCardProps['crowdLevel'] | CafeCardProps['powerOutlets']): string => {
   switch (level) {
     case 'Low':
     case 'Plenty': // Assuming Plenty maps to green for power
@@ -35,7 +35,7 @@ const CafeCard: React.FC<CafeCardProps> = ({
   imageUrl,
   hasWifi,
   crowdLevel,
-  powerLevel,
+  powerOutlets,
   rating,
   distance,
 }) => {
@@ -112,9 +112,9 @@ const CafeCard: React.FC<CafeCardProps> = ({
           {/* Outlets/Power */}
           <div className="flex items-center space-x-1.5">
             <Power className="w-4 h-4 text-amber-900 flex-shrink-0" />
-            <span className={`w-3 h-3 rounded-full ${getIndicatorColor(powerLevel)} flex-shrink-0`}></span>
+            <span className={`w-3 h-3 rounded-full ${getIndicatorColor(powerOutlets)} flex-shrink-0`}></span>
             <span>Outlets:</span>
-            <span className="font-medium">{powerLevel}</span>
+            <span className="font-medium">{powerOutlets}</span>
           </div>
           {/* WiFi Indicator */}
           {hasWifi !== undefined && (
