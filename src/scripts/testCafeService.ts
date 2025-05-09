@@ -34,8 +34,8 @@ const runTest = async () => {
     // Required fields based on your interface:
     hasWifi: true, // Optional example (boolean)
     // Required fields based on your interface:
-    powerOutlets: 'plenty' as const, // Must be one of 'plenty'|'some'|'full'|'unknown'|'none'
-    crowdLevel: 'low' as const, // Must be one of 'high'|'medium'|'low'|'unknown'
+    powerOutlets: 'Plenty' as const, // Must be one of 'plenty'|'some'|'full'|'unknown'|'none'
+    crowdLevel: 'Low' as const, // Must be one of 'high'|'medium'|'low'|'unknown'
   };
   // Using 'as const' helps TypeScript confirm we're using one of the allowed literal strings
 
